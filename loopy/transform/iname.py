@@ -330,7 +330,7 @@ def _split_iname_backend(kernel, iname_to_split,
                 {outer_iname: existing_tag, inner_iname: existing_tag})
 
     kernel = tag_inames(kernel, {outer_iname: outer_tag, inner_iname: inner_tag})
-    kernel = remove_unused_inames(kernel, [iname_to_split])
+    #kernel = remove_unused_inames(kernel, [iname_to_split])
 
     return kernel
 
