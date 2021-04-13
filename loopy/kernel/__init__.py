@@ -798,6 +798,7 @@ class LoopKernel(ImmutableRecordWithoutPickling):
         """
         Returns a :class:`frozenset` of the names of all the inames in the kernel.
         """
+        return frozenset(self.inames.keys())
         return _get_inames_from_domains(self.domains)
 
     @memoize_method
