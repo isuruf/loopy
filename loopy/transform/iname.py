@@ -1223,7 +1223,10 @@ def remove_unused_inames(kernel, inames=None):
 
         domains = new_domains
 
-    kernel = kernel.copy(domains=domains)
+    inames_new = kernel.inames.copy()
+    for unused_iname in unused_inames:
+        del inames_new[unused_iname]
+    kernel = kernel.copy(domains=domains, inames=inames_new, inames_is_final=True)
 
     # }}}
 

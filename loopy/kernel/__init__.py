@@ -275,7 +275,8 @@ class LoopKernel(ImmutableRecordWithoutPickling):
             target=None,
 
             overridden_get_grid_sizes_for_insn_ids=None,
-            _cached_written_variables=None):
+            _cached_written_variables=None,
+            inames_is_final=False):
         """
         :arg overridden_get_grid_sizes_for_insn_ids: A callable. When kernels get
             intersected in slab decomposition, their grid sizes shouldn't
@@ -329,7 +330,7 @@ class LoopKernel(ImmutableRecordWithoutPickling):
 
             inames = {name: Iname(name, iname_to_tags.get(name, frozenset()))
                       for name in _get_inames_from_domains(domains)}
-        else:
+        elif not inames_is_final:
             if iname_to_tags is not None:
                 raise LoopyError("Cannot provide both iname_to_tags and inames to "
                         "LoopKernel.__init__")
@@ -1618,6 +1619,9 @@ class LoopKernel(ImmutableRecordWithoutPickling):
                         "LoopKernel.copy")
 
             kwargs["inames"] = None
+
+        if "domains" not in kwargs:
+            kwargs.setdefault("inames_is_final", True)
 
         # Avoid carrying over an invalid cache when other parts of the kernel
         # are modified.
