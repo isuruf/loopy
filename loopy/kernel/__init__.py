@@ -395,8 +395,8 @@ class LoopKernel(ImmutableRecordWithoutPickling):
         elif linearization is not None:
             schedule = linearization
 
-        assert all(dom.get_ctx() == isl.DEFAULT_CONTEXT for dom in domains)
-        assert assumptions.get_ctx() == isl.DEFAULT_CONTEXT
+        #assert all(dom.get_ctx() == isl.DEFAULT_CONTEXT for dom in domains)
+        #assert assumptions.get_ctx() == isl.DEFAULT_CONTEXT
 
         ImmutableRecordWithoutPickling.__init__(self,
                 domains=domains,
